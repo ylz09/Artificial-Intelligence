@@ -27,8 +27,3 @@ Each file are independant to others, so just run :
 	python file_name.py
 to execute the codes.
 
----------------------------Contact---------------------------
-If you have any problmes about execution of code,please email:
-	lizhou@udel.edu
-Thanks!
-
