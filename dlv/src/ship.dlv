@@ -1,0 +1,64 @@
+%year
+year(3..6).
+
+%cruisers
+cruiser(c).%cory
+cruiser(d).%damon
+cruiser(g).%greg
+cruiser(m).%miranda
+
+%destination
+destination(bs).%barbados
+destination(me).%martinique
+destination(sl).%saint lucia
+destination(td).%trinidad
+
+%cruise
+cruise(as).%azure sea
+cruise(ca).%caprica
+cruise(fa).%farrlon
+cruise(ss).%silver shores
+
+%somebody must depart at a year
+depart(c,Y) v depart(d,Y) v depart(g,Y) v depart(m,Y) :- year(Y).
+%all places must be visited at a year
+visited(bs,Y) v visited(me,Y) v visited(sl,Y) v visited(td,Y) :- year(Y).
+%all cruise must be took at a year
+take(as,Y) v take(ca,Y) v take(fa,Y) v take(ss,Y) :- year(Y).
+
+%unary constraints
+%-depart(d,3).
+:- Y=3,depart(d,Y),year(Y).
+%visited(X,Y), X=sl,Y=6.
+:- Y!=6,visited(sl,Y),year(Y).
+%:- take(X,Y), X=ss, Y=6. 
+:- Y!=6,take(ss,Y),year(Y).
+:- X!=ca,depart(d,Y),take(X,Y),Y!=3,year(Y),cruise(X).
+
+%binary constraints
+%bs!=CA
+:- X=Y,take(ca,X), visited(bs,Y),year(X),year(Y).
+%td!=FA
+:- X=Y,take(fa,X), visited(td,Y),year(X),year(Y).
+%sl!=FA
+:- X=Y,take(fa,X), visited(sl,Y),year(X),year(Y).
+%G-1=td
+:- not +(Y,1,X),depart(g,X),visited(td,Y),year(X),year(Y).
+%td>bs
+:- Y1<=Y2 ,visited(td,Y1),visited(bs,Y2),year(Y1),year(Y2).
+%me>C
+:-Y1<=Y2,visited(me,Y1),depart(c,Y2),year(Y1),year(Y2).
+%FA-1=AS
+:- not +(Y2,1,Y1),take(fa,Y1),take(as,Y2),year(Y1),year(Y2).
+%sl=SS
+:- Y1!=Y2,visited(sl,Y1),take(ss,Y2),year(Y1),year(Y2).
+
+%global constraints
+% different person can't depart at same year
+:- A=B, year(X),year(Y),X!=Y,depart(A,X),depart(B,Y).
+% different cruise can't be token at same year
+:- A=B, year(X),year(Y),X!=Y,take(A,X),take(B,Y).
+% different destination can't be visited at same year
+:- A=B, year(X),year(Y),X!=Y,visited(A,X),visited(B,Y).
+
+

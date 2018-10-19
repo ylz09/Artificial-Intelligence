@@ -1,0 +1,7 @@
+faster(X,Y) :- horse(X),dog(Y).
+greyhound(g).
+faster(g,R) :- greyhound(g),rabbit(R).
+horse(harry).
+rabbit(ralph).
+dog(X) :- greyhound(X).
+faster(X,Z) :- faster(X,Y), faster(Y,Z).

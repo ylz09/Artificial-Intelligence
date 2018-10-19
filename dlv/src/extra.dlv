@@ -1,0 +1,8 @@
+poet(molly).
+poet(marilyn).
+
+write(molly,formally).
+write(marilyn,formally).
+
+progressive(X) v conservative(X):- poet(X).
+conservative(X) :- write(X,formally),poet(X).
