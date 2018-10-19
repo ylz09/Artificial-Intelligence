@@ -7,10 +7,10 @@ http://www.dlvsystem.com/html/The_DLV_Tutorial.html
 
 
 File list:
-p1: god.dlv 
-p3: ship.dlv
-p4: strimko.dlv
-extra: extra.dlv
+	p1: god.dlv 
+	p3: ship.dlv
+	p4: strimko.dlv
+	extra: extra.dlv
 
 all files can be run using:
-./dlv -silent -nofacts filename.dlv
+	./dlv -silent -nofacts filename.dlv
